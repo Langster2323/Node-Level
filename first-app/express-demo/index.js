@@ -6,6 +6,7 @@ const app = express();
 const Joi = require('joi');
 const logger = require('./logger');
 const authenticate = require('./authenticate');
+const debug = require('debug')('app:startup');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // don't have to pass extended
@@ -18,7 +19,7 @@ console.log('Mail Password: ' + config.get('mail.password'));
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    console.log('Morgan enabled');
+    debug('Morgan enabled');
 }
 
 app.use(helmet());
