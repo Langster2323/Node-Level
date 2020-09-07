@@ -8,6 +8,9 @@ const logger = require('./logger');
 const authenticate = require('./authenticate');
 const debug = require('debug')('app:startup');
 
+app.set('view engine', 'pug');
+app.set('views', './views'); // default
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // don't have to pass extended
 app.use(express.static('public'));
@@ -36,7 +39,7 @@ const courses = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.render('index', { title: 'My Express App', message: 'hello' })
 });
 
 app.get('/api/courses', (req, res) => {
